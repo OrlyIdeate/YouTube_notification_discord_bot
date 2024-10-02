@@ -25,7 +25,7 @@ client = discord.Client(intents=discord.Intents.default())
 latest_video_id = None
 
 
-@tasks.loop(minutes=10)
+@tasks.loop(minutes=30)
 async def check_new_video():
 	global latest_video_id
 	request = youtube.search().list(
