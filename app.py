@@ -13,7 +13,7 @@ YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
 DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')
 DISCORD_CHANNEL_ID = os.getenv('DISCORD_CHANNEL_ID')
-DISCORD_USER_ID = os.getenv('DISCORD_USER_ID')
+DISCORD_USER_IDS = os.getenv('DISCORD_USER_IDS').split(',')
 
 # YouTube APIクライアントの設定
 youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
@@ -42,12 +42,12 @@ async def check_new_video():
 		video_title = response['items'][0]['snippet']['title']
 		video_url = f'https://www.youtube.com/watch?v={video_id}'
 
-		user = await client.fetch_user(int(DISCORD_USER_ID))
-
-		if user is not None:
-			await user.send(f'新しい動画がアップされました: {video_title}\n{video_url}')
-		else:
-			print(f'ユーザーが見つかりません: {DISCORD_USER_ID}')
+		for user_id in DISCORD_USER_IDS:
+			user = await client.fetch_user(int(user_id))
+			if user is not None:
+				await user.send(f'新しい動画がアップされました: {video_title}\n{video_url}')
+			else:
+				print(f'ユーザーが見つかりません: {user_id}')
 
 
 
