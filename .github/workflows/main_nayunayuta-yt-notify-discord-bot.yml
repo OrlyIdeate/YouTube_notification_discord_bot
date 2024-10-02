@@ -64,4 +64,4 @@ jobs:
         with:
           app-name: 'nayunayuta-YT-notify-discord-bot'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF853869CED74D788C944E5450B4A15A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6CDF052049C5453DB91FD39E071D305A }}
